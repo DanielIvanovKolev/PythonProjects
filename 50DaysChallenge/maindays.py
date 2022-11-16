@@ -15,7 +15,6 @@ def convert_add(str_list):
 
 
 def check_duplicates(myList):
-    temp = 'Default'
     myList2 = []
     for item in myList:
         if item not in myList2:
