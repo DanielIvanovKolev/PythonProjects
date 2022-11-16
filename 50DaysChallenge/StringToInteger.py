@@ -15,15 +15,17 @@ def convert_add(str_list):
 
 
 def check_duplicates(myList):
-    temp = 'Default'
+    myList2 = []
     for item in myList:
-        print(item)
-        if item in myList:
-            return item
-    return temp
+        if item not in myList2:
+            myList2.append(item)
+        else:
+            print(item)
 
+    if len(myList) == len(myList2):
+        print("No Duplicates!")
 
 
 if __name__ == '__main__':
     print(convert_add(['1', '3', '6', 'a']))
-    print(check_duplicates(['apple', 'banana', 'watermelon', 'apple']))
+    check_duplicates(['apple', 'banana', 'watermelon', 'apple', 'watermelon'])
