@@ -23,7 +23,7 @@ def check_duplicates(myList):
             print(item)
 
     if len(myList) == len(myList2):
-        print("No Duplicates!")
+        print("No Duplicates! ")
 
 
 if __name__ == '__main__':
