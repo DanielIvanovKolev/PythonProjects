@@ -20,6 +20,7 @@ def divide_or_square(number):
 # longest value, we pass len to the key parameter. If we do not pass len to the key
 # parameter, it will return green as the longest value which is lexicographically larger
 # than apple.
+
 def longest_value(d: dict):
     # Using max and key len to get the longest value
     longest = max(d.values(), key=len)
