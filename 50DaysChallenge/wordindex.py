@@ -40,7 +40,7 @@ def word_index(myList):
 
 
 listStr  = ["Hate", "remorse", "vengeance"]
-listStr2 = ["Love", "Hate", "Hate", "Hate", "Hate", "Hate", "Hate", "Hates"]
+listStr2 = ["Love", "Hate", "Hate", "Hate", "Hate", "Hate", "Hates"]
 if __name__ == '__main__':
     print(only_floats(12, 20))
     print(word_index(listStr))
