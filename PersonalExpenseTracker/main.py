@@ -26,45 +26,6 @@ def add_category():
         print(f"An error occurred: {e}")
 
 
-# Function to list all categories
-def list_categories():
-    try:
-        with open(categories_file, mode='r') as file:
-            reader = csv.reader(file)
-            categories = list(reader)
-            if categories:
-                print("Available Categories:")
-                for i, row in enumerate(categories, 1):
-                    print(f"{i}. {row[0]}")
-            else:
-                print("No categories found. Add some first!")
-    except FileNotFoundError:
-        print("No categories file found. Add some categories first!")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-
-def list_expenses():
-    currency = " BGN"  # Set your desired currency symbol here
-    try:
-        with open(expenses_file, mode='r') as file:
-            reader = csv.DictReader(file)
-            expenses = list(reader)
-            if expenses:
-                print("\nExpenses:")
-                print("{:<15} {:<20} {:<15}".format("Date", "Category", "Amount"))
-                print("-" * 50)
-                for row in expenses:
-                    amount_with_currency = f"{row['Amount']}{currency}"
-                    print("{:<15} {:<20} {:<15}".format(row["Date"], row["Category"], amount_with_currency))
-            else:
-                print("No expenses found. Add some first!")
-    except FileNotFoundError:
-        print("No expenses file found. Add some expenses first!")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-
 # Function to add an expense
 def add_expense():
     list_categories()  # Display available categories
@@ -104,6 +65,45 @@ def add_expense():
                 writer.writeheader()
             writer.writerow(expense)
             print("Expense added successfully!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+# Function to list all categories
+def list_categories():
+    try:
+        with open(categories_file, mode='r') as file:
+            reader = csv.reader(file)
+            categories = list(reader)
+            if categories:
+                print("Available Categories:")
+                for i, row in enumerate(categories, 1):
+                    print(f"{i}. {row[0]}")
+            else:
+                print("No categories found. Add some first!")
+    except FileNotFoundError:
+        print("No categories file found. Add some categories first!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+def list_expenses():
+    currency = " BGN"  # Set your desired currency symbol here
+    try:
+        with open(expenses_file, mode='r') as file:
+            reader = csv.DictReader(file)
+            expenses = list(reader)
+            if expenses:
+                print("\nExpenses:")
+                print("{:<15} {:<20} {:<15}".format("Date", "Category", "Amount"))
+                print("-" * 50)
+                for row in expenses:
+                    amount_with_currency = f"{row['Amount']}{currency}"
+                    print("{:<15} {:<20} {:<15}".format(row["Date"], row["Category"], amount_with_currency))
+            else:
+                print("No expenses found. Add some first!")
+    except FileNotFoundError:
+        print("No expenses file found. Add some expenses first!")
     except Exception as e:
         print(f"An error occurred: {e}")
 
