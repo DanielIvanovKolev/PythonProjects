@@ -1,30 +1,15 @@
-# Look at from collections import namedtuples!!!!!
-# It's like OOP , but strange!
+from datetime import datetime
 
-'''
-f = open('practice.txt', 'w+')
-f.write('This is a test file')
-f.close()
+print(datetime.now().time())
 
-with open('practice_v2.txt', mode='a', newline='') as file:
-    # The newline It tells Python to preserve the line endings exactly as they are in the file
-    file.write("This is the second file test")
-'''
+# if we want to use it otherwise
+
+from datetime import time
+
+time = time(2, 20)
+
+print(time.hour)
+print(time.min)
+# And so on...
 
 
-import os
-
-print(os.getcwd())
-print(os.listdir())
-print(os.listdir('D:\\Pictures'))
-
-import shutil
-
-shutil.move('practice.txt', 'D:\\Programming\\Projects\\PythonProjects\\CollectionsModules\\Files')  # Takes a source and move it to a destination
-#shutil.move('Files/practice.txt', 'D:\\Programming\\Projects\\PythonProjects\\CollectionsModules')  # Takes a source and move it to a destination
-
-'''
-os.unlink(path) - Deletes a file at the path provided
-os.rmdir(path) - Deletes a directory (folder must be empty) at a path provided
-shutil.rmtree(path) - It will remove all the files and folders contained in the path - Something like rm -f 
-'''
