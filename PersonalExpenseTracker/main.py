@@ -8,6 +8,7 @@ from datetime import datetime
 # File names
 categories_file = "Database/categories.csv"
 expenses_file = "Database/expenses.csv"
+balance_file = "Database/balance.csv"
 
 
 # Function to add a new category
@@ -48,6 +49,7 @@ def add_expense():
             add_category()
 
         amount = input("Enter the amount: ").strip()
+        subtract_balance(amount)
         if not amount.isdigit():
             print("Amount must be a number.")
             return
@@ -108,6 +110,87 @@ def list_expenses():
         print(f"An error occurred: {e}")
 
 
+def read_balance():
+    try:
+        with open(balance_file, mode='r') as file:
+            reader = csv.reader(file)
+            curr_balance = float(next(reader)[0])
+    except FileNotFoundError:
+        print("No balance file found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    return curr_balance
+
+
+def write_balance(curr_balance):
+    try:
+        with open(balance_file, mode='w') as file:
+            writer = csv.writer(file)
+            writer.writerow([curr_balance])
+    except FileNotFoundError:
+        print("No balance file found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+def check_balance():
+    print(f"Your Current Balance is: {read_balance()}")
+
+
+def reset_balance():
+    print(f"Your Current Balance is: {read_balance()}")
+    print("What do you want you new balance to be?")
+    new_balance = input("Enter Amount: ")
+    write_balance(new_balance)
+
+
+def subtract_balance(amount):
+    curr_balance = read_balance() - float(amount)
+    write_balance(curr_balance)
+    print(f"New Balance: {read_balance()}")
+
+
+def add_balance():
+    curr_balance = read_balance()
+    try:
+        while True:
+            new_balance = input(f"Current Balance: {curr_balance}! What amount do you want to add to your account: ")
+            if new_balance.isdigit():
+                curr_balance += float(new_balance)
+                break
+            else:
+                print("Error! Wrong Value! Try a number.")
+
+        write_balance(curr_balance)
+        print("Successfully added!")
+        print(f"New Balance: {curr_balance}")
+
+    except FileNotFoundError:
+        print("No balance file found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+def balance():
+    while True:
+        print("\nMenu:")
+        print("1. Check Balance")
+        print("2. Reset Balance")
+        print("3. Add to Balance")
+        print("4. Exit")
+        choice = input("Choose an option: ").strip()
+
+        if choice == "1":
+            check_balance()
+        elif choice == "2":
+            reset_balance()
+        elif choice == "3":
+            add_balance()
+        else:
+            break
+
+
 # Menu system
 def menu():
     while True:
@@ -116,7 +199,8 @@ def menu():
         print("2. List Categories")
         print("3. Add Expense")
         print("4. List Expenses")
-        print("5. Exit")
+        print("5. Add/Check Balance")
+        print("6. Exit")
         choice = input("Choose an option: ").strip()
 
         if choice == "1":
@@ -128,6 +212,8 @@ def menu():
         elif choice == "4":
             list_expenses()
         elif choice == "5":
+            balance()
+        elif choice == "6":
             print("Goodbye!")
             break
         else:
